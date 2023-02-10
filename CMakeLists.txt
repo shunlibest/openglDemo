@@ -15,10 +15,20 @@ link_directories(/usr/local/lib) # 安装GLFW时默认安装库文件位置
 # 链接编译需要的系统框架
 link_libraries("-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo")
 # 添加源文件（这里的 main.cpp 是你的C++源码文件）
-add_executable(LearnOpenGL glad.c main.cpp) # glad.c 一定要填进去！
+
+# 查找当前目录下所有源文件名，并将其存储到	DIR_CURR中
+#aux_source_directory(./learnStep DIR_learnStep)
+
+
+#add_executable(LearnOpenGL glad.c main.cpp ${DIR_learnStep}) # glad.c 一定要填进去！
 #add_executable(Demo main.cpp)
 
+add_executable(main main.cpp glad.c)
+add_executable(c01_DisplayWindow learnStep/c01_DisplayWindow.cpp glad.c)
+
 # 链接 GLFW 库
-target_link_libraries(LearnOpenGL glfw3)
+target_link_libraries(main glfw3)
+target_link_libraries(c01_DisplayWindow glfw3)
+
 
 
